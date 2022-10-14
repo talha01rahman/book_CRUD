@@ -7,13 +7,13 @@ class ViewBookComponent extends Component {
 
         this.state = {
             id: this.props.match.params.id,
-            employee: {}
+            book: {}
         }
     }
 
     componentDidMount(){
-        BookService.getEmployeeById(this.state.id).then( res => {
-            this.setState({employee: res.data});
+        BookService.getbookById(this.state.id).then( res => {
+            this.setState({book: res.data});
         })
     }
 
@@ -26,15 +26,15 @@ class ViewBookComponent extends Component {
                     <div className = "card-body">
                         <div className = "row">
                             <label> Book Titel : </label>
-                            <div> { this.state.employee.firstName }</div>
+                            <div> { this.state.book.booktitle }</div>
                         </div>
                         <div className = "row">
                             <label> Author Name : </label>
-                            <div> { this.state.employee.lastName }</div>
+                            <div> { this.state.book.author }</div>
                         </div>
                         <div className = "row">
                             <label> Price : </label>
-                            <div> { this.state.employee.emailId }</div>
+                            <div> { this.state.book.price }</div>
                         </div>
                     </div>
                      

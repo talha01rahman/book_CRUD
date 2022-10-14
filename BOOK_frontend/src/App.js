@@ -18,9 +18,9 @@ function App() {
                     <Switch> 
                           <Route path = "/" exact component = {ListBookComponent}></Route>
                           <Route path = "/employees" component = {ListBookComponent}></Route>
-                          <Route path = "/add-employee/:id" component = {CreateBookComponent}></Route>
-                          <Route path = "/view-employee/:id" component = {ViewBookComponent}></Route>
-                          {/* <Route path = "/update-employee/:id" component = {UpdateBookComponent}></Route> */}
+                          <Route path = "/add-book/:id" component = {CreateBookComponent}></Route>
+                          <Route path = "/view-book/:id" component = {ViewBookComponent}></Route>
+                          {/* <Route path = "/update-book/:id" component = {UpdateBookComponent}></Route> */}
                     </Switch>
                 </div>
               <FooterComponent />

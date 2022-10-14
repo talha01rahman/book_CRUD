@@ -7,45 +7,45 @@ class UpdateBookComponent extends Component {
 
         this.state = {
             id: this.props.match.params.id,
-            firstName: '',
-            lastName: '',
-            emailId: ''
+            booktitle: '',
+            author: '',
+            price: ''
         }
-        this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
-        this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
-        this.updateEmployee = this.updateEmployee.bind(this);
+        this.changebooktitleHandler = this.changebooktitleHandler.bind(this);
+        this.changeauthorHandler = this.changeauthorHandler.bind(this);
+        this.updateBook = this.updateBook.bind(this);
     }
 
     componentDidMount(){
-        BookService.getEmployeeById(this.state.id).then( (res) =>{
-            let employee = res.data;
-            this.setState({firstName: employee.firstName,
-                lastName: employee.lastName,
-                emailId : employee.emailId
+        BookService.getbookById(this.state.id).then( (res) =>{
+            let book = res.data;
+            this.setState({booktitle: book.booktitle,
+                author: book.author,
+                price : book.price
             });
         });
     }
 
-    updateEmployee = (e) => {
+    updateBook = (e) => {
         e.preventDefault();
-        let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId};
-        console.log('employee => ' + JSON.stringify(employee));
+        let book = {booktitle: this.state.booktitle, author: this.state.author, price: this.state.price};
+        console.log('book => ' + JSON.stringify(book));
         console.log('id => ' + JSON.stringify(this.state.id));
-        BookService.updateEmployee(employee, this.state.id).then( res => {
+        BookService.updateBook(book, this.state.id).then( res => {
             this.props.history.push('/employees');
         });
     }
     
-    changeFirstNameHandler= (event) => {
-        this.setState({firstName: event.target.value});
+    changebooktitleHandler= (event) => {
+        this.setState({booktitle: event.target.value});
     }
 
-    changeLastNameHandler= (event) => {
-        this.setState({lastName: event.target.value});
+    changeauthorHandler= (event) => {
+        this.setState({author: event.target.value});
     }
 
     changeEmailHandler= (event) => {
-        this.setState({emailId: event.target.value});
+        this.setState({price: event.target.value});
     }
 
     cancel(){
@@ -64,21 +64,21 @@ class UpdateBookComponent extends Component {
                                     <form>
                                         <div className = "form-group">
                                             <label> Book Title: </label>
-                                            <input placeholder="Book Title" name="firstName" className="form-control" 
-                                                value={this.state.firstName} onChange={this.changeFirstNameHandler}/>
+                                            <input placeholder="Book Title" name="booktitle" className="form-control" 
+                                                value={this.state.booktitle} onChange={this.changebooktitleHandler}/>
                                         </div>
                                         <div className = "form-group">
                                             <label> Author: </label>
-                                            <input placeholder="Author" name="lastName" className="form-control" 
-                                                value={this.state.lastName} onChange={this.changeLastNameHandler}/>
+                                            <input placeholder="Author" name="author" className="form-control" 
+                                                value={this.state.author} onChange={this.changeauthorHandler}/>
                                         </div>
                                         <div className = "form-group">
                                             <label> Price: </label>
-                                            <input placeholder="Email Address" name="emailId" className="form-control" 
-                                                value={this.state.emailId} onChange={this.changeEmailHandler}/>
+                                            <input placeholder="Email Address" name="price" className="form-control" 
+                                                value={this.state.price} onChange={this.changeEmailHandler}/>
                                         </div>
 
-                                        <button className="btn btn-success" onClick={this.updateEmployee}>Save</button>
+                                        <button className="btn btn-success" onClick={this.updateBook}>Save</button>
                                         <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>Cancel</button>
                                     </form>
                                 </div>

@@ -10,29 +10,29 @@ class ListBookComponent extends Component {
         }
         this.addEmployee = this.addEmployee.bind(this);
         this.editEmployee = this.editEmployee.bind(this);
-        this.deleteEmployee = this.deleteEmployee.bind(this);
+        this.deleteBook = this.deleteBook.bind(this);
     }
 
-    deleteEmployee(id){
-        BookService.deleteEmployee(id).then( res => {
-            this.setState({employees: this.state.employees.filter(employee => employee.id !== id)});
+    deleteBook(id){
+        BookService.deleteBook(id).then( res => {
+            this.setState({employees: this.state.employees.filter(book => book.id !== id)});
         });
     }
     viewEmployee(id){
-        this.props.history.push(`/view-employee/${id}`);
+        this.props.history.push(`/view-book/${id}`);
     }
     editEmployee(id){
-        this.props.history.push(`/add-employee/${id}`);
+        this.props.history.push(`/add-book/${id}`);
     }
 
     componentDidMount(){
-        BookService.getEmployees().then((res) => {
+        BookService.getBook().then((res) => {
             this.setState({ employees: res.data});
         });
     }
 
     addEmployee(){
-        this.props.history.push('/add-employee/_add');
+        this.props.history.push('/add-book/_add');
     }
 
     render() {
@@ -57,15 +57,15 @@ class ListBookComponent extends Component {
                             <tbody>
                                 {
                                     this.state.employees.map(
-                                        employee => 
-                                        <tr key = {employee.id}>
-                                             <td> { employee.firstName} </td>   
-                                             <td> {employee.lastName}</td>
-                                             <td> {employee.emailId}</td>
+                                        book => 
+                                        <tr key = {book.id}>
+                                             <td> { book.booktitle} </td>   
+                                             <td> {book.author}</td>
+                                             <td> {book.price}</td>
                                              <td>
-                                                 <button onClick={ () => this.editEmployee(employee.id)} className="btn btn-info">Update </button>
-                                                 <button style={{marginLeft: "10px"}} onClick={ () => this.deleteEmployee(employee.id)} className="btn btn-danger">Delete </button>
-                                                 <button style={{marginLeft: "10px"}} onClick={ () => this.viewEmployee(employee.id)} className="btn btn-info">View </button>
+                                                 <button onClick={ () => this.editEmployee(book.id)} className="btn btn-info">Update </button>
+                                                 <button style={{marginLeft: "10px"}} onClick={ () => this.deleteBook(book.id)} className="btn btn-danger">Delete </button>
+                                                 <button style={{marginLeft: "10px"}} onClick={ () => this.viewEmployee(book.id)} className="btn btn-info">View </button>
                                              </td>
                                         </tr>
                                     )
